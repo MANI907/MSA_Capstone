@@ -4,9 +4,9 @@
 |B|Saga|전선민|1||
 |B|CQRS|전선민|2||
 |B|Correlation|전선민|3||
-|B|Req/Resp|전선민|4|90%|
+|B|Req/Resp|전선민|4|100%|
 |C|Gateway|변용수|4|90%|
-|C|Deploy/Pipeline|변용수|1|10%|
+|C|Deploy/Pipeline|변용수|1|80%|
 |C|Circuite Breaker|변용수|2|90%|
 |C|Config Map/PV|변용수|3|90%|
 |C|Polyglot|변용수|4|0%|
