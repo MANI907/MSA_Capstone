@@ -9,7 +9,7 @@
 <img src = '/images/Screen Shot 2022-03-28 at 15.18.42.png'>
 
 + Step3
-*1차 완성본 대한 기능 검증*
+*완성본 대한 기능 검증*
 <img src = '/images/Screen Shot 2022-03-28 at 15.30.42.png'>
 
 ```
@@ -23,5 +23,3 @@
   - 고객 결제처리 : 결제가 완료되지 않은 요청은 ACID 트랜잭션 적용(Request/Response 방식처리) (OK)
   - 결제가 완료되면 택시기사에게 배차 요청정보가 전달된다 (OK)
 ```
-
-## 
