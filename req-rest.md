@@ -99,5 +99,4 @@ public class ApiTestApplication {
 ```
 
 + Run 
-<img src = '/images/Screen Shot 2022-03-28 at 22.27.11.png'>
-<img src = '/images/Screen Shot 2022-03-28 at 22.27.53.png'>
+<img src = '/images/Screen Shot 2022-03-28 at 0.54.37.png'>
