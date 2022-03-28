@@ -2,6 +2,9 @@
 
 __github contributor history API활용__
 
+    * Interface 선언을 통해 자동으로 Http Client 생성
+    * 선언적 Http Client란, Annotation만으로 Http Client를 만들수 있고, 이를 통해서 Http API호출이 가능
+
 + Dependency 추가
 ```java
 dependencies {
@@ -62,7 +65,7 @@ public class GitHubFeignController {
 }
 ```
 
-+ FeignClient Interface
++ <span style='color:red'>FeignClient Interface</span>
 ```java
 package com.example.feigntest.client;
 
@@ -95,5 +98,4 @@ public class ApiTestApplication {
 
 ```
 
-+ 123
-+ 34
++ ...
