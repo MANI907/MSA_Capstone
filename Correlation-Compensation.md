@@ -45,6 +45,8 @@ public class CorrelationHttpHeaderHelper {
 } 
 ```
 
+
 ## Compensation
 -----------------
-Correlation Id 정보를 기반으로
+Correlation Id 정보를 기반으로 
+
