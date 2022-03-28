@@ -62,7 +62,7 @@ public class GitHubFeignController {
 }
 ```
 
-+ FeinClient Interface
++ FeignClient Interface
 ```
 package com.example.feigntest.client;
 
@@ -77,4 +77,20 @@ public interface GitHubFeignClient {
 ```
 
 
-+ @
++ @EnableFeignClients Set
+```
+package com.example;
+
+import ...
+
+@EnableFeignClients
+@SpringBootApplication
+public class ApiTestApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(ApiTestApplication.class, args);
+    }
+
+}
+
+```
