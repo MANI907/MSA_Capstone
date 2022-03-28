@@ -63,7 +63,7 @@ public class GitHubFeignController {
 ```
 
 + FeignClient Interface
-```
+```java
 package com.example.feigntest.client;
 
 import ...
@@ -78,7 +78,7 @@ public interface GitHubFeignClient {
 
 
 + @EnableFeignClients Set
-```
+```java
 package com.example;
 
 import ...
@@ -94,3 +94,6 @@ public class ApiTestApplication {
 }
 
 ```
+
++ 123
++ 34
