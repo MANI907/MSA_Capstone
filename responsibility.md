@@ -1,6 +1,6 @@
 |Group|Task|Respons.|Priority|Etc|
 |------|---|---|---|------------------|
-|A|Modeling|양기훈|1||
+|A|Modeling|양기훈|1|90%|
 |B|Saga|전선민|1||
 |B|CQRS|전선민|2||
 |B|Correlation|전선민|3||
