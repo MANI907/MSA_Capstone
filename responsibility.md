@@ -10,6 +10,6 @@
 |C|Circuite Breaker|변용수|2||
 |C|Config Map/PV|변용수|3||
 |C|Polyglot|변용수|4||
-|D|Autoscale(HPA)|조형관|1||
-|D|Zero-downtime deploy(Readliness Probe)|조형관|2||
-|D|Self-Healing(Liveness Probe)|조형관|3||
+|D|Autoscale(HPA)|조형관|1|90%|
+|D|Zero-downtime deploy(Readliness Probe)|조형관|2|90%|
+|D|Self-Healing(Liveness Probe)|조형관|3|90%|
