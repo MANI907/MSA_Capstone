@@ -19,7 +19,7 @@
 <img src = '/images/Screen Shot 2022-03-28 at 15.18.42.png'>
 
 + Step3
-*1차 완성본ㅇ 대한 기능 검증*
+*1차 완성본 대한 기능 검증*
 <img src = '/images/Screen Shot 2022-03-28 at 15.30.42.png'>
 
 ```
