@@ -548,7 +548,7 @@ public class HTaxiFeignService {
 
 ```
 
-+ <span style='color:red'>FeignClient Interface</span>
++ FeignClient Interface
 ```diff
 package com.example.feigntest.client;
 
@@ -563,8 +563,23 @@ public interface HTaxiFeignClient {
 
 ```
 
++ DTO
+```java
+package com.example.feigntest.dto;
 
-+ @EnableFeignClients Set
+import lombok.Data;
+
+@Data
+public class Contributor {
+    String login;
+    String id;
+    String type;
+    String site_admin;
+}	
+```
+	
+	
++ `@EnableFeignClients` Set
 ```diff
 package com.example;
 
@@ -582,4 +597,4 @@ public class ApiTestApplication {
 ```
 
 + Run 
-<img src = '/images/Screen Shot 2022-03-29 at 0.54.37.png'>
+<img src = '/images/Screen Shot 2022-03-29 at 0.54.37.png' width="900px">
