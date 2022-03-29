@@ -66,8 +66,8 @@ H Taxi
     ```
   + DDD적용<p>
     3개의 도메인으로 관리되고 있으며 `배차요청(Grab)`, `결제(Payment)`, `배차할당(Allocation)`으로 구성된다.
-    ```diff
-    ... 
+ 
+```diff
     
     @Document
     @Table(name="Grab_table")
@@ -82,25 +82,41 @@ H Taxi
         private String destination;
         private Integer estimatedFee;
 
-        @PostPersist
++       @PostPersist
         public void onPostPersist(){
 
             //배차요청
             GrabRequestConfirmed grabRequestConfirmed = new GrabRequestConfirmed();
-
 +           BeanUtils.copyProperties(this, grabRequestConfirmed);
             grabRequestConfirmed.publishAfterCommit();
-
 +           htaxi.external.Payment payment = new htaxi.external.Payment();
             payment.setId(getid());
 
             GrabApplication.applicationContext.getBean(htaxi.external.PaymentService.class).pay(payment);
             grabCancelled.publishAfterCommit();
-
         }
-     ...
+```
    
-    ```
   + 서비스 호출흐름(Sync)<p>
-    배차요청(Grab) -> 결제(Pay)간 호출은 동기식으로 일관성을 유지하는 트랜젝션으로 처리
+    `배차요청(Grab)` -> `결제(Pay)`간 호출은 동기식으로 일관성을 유지하는 트랜젝션으로 처리
+    * 고객이 목적지를 설정하고 택시 배차를 요청한다.
+    * 결제서비스를 호출하기위해 FeinClient를 이용하여 인터페이스(Proxy)를 구현한다.
+    * 배차요청을 받은 직후(`@PostPersist`) 결제를 요청하도록 처리한다.
+```
+// PaymentService.java
+
+package htaxi.external;
+
+import ...
+
+@FeignClient(name="Payment", url="http://localhost:8080")
+public interface PaymentService {
+    @RequestMapping(method= RequestMethod.GET, path="/payments")
+    public void pay(@RequestBody Payment payment);
+
+}   
+```
+   
+
   + 서비스 호출흐름(Async)<p>
+    * 결제가 
