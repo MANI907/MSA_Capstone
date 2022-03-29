@@ -1187,7 +1187,7 @@ mysql> exit
 
 + Grab모듈 Java -> Kotlin 변환
 
-<img src="https://github.com/yongdoohar/h-taxi/blob/main/kotlin-convert.png />
+<img src="https://github.com/yongdoohar/h-taxi/blob/main/kotlin-convert.png" />
 <img src="https://github.com/yongdoohar/h-taxi/blob/main/kotlin.png" />
 
 + `deploy` 부분을 동일하게 진행하여 테스트
