@@ -1,36 +1,66 @@
 H Taxi
 ============
 카카오택시 따라잡기
----------------
+-----
 <img src = "https://t1.kakaocdn.net/kakaomobility/company_website/contents/v2/10-taxi-sub-4.jpg" width = "700">
 
-# Table of contents
-- [예제 - 택시호출](#---)
-  - [서비스 시나리오](#서비스-시나리오)
-  - [체크포인트](#체크포인트)
-  - [분석/설계](#분석설계)
-  - [구현:](#구현-)
-    - [DDD 의 적용](#ddd-의-적용)
-    - [폴리글랏 퍼시스턴스](#폴리글랏-퍼시스턴스)
-    - [폴리글랏 프로그래밍](#폴리글랏-프로그래밍)
-    - [동기식 호출 과 Fallback 처리](#동기식-호출-과-Fallback-처리)
-    - [비동기식 호출 과 Eventual Consistency](#비동기식-호출-과-Eventual-Consistency)
-  - [운영](#운영)
-    - [CI/CD 설정](#cicd설정)
-    - [동기식 호출 / 서킷 브레이킹 / 장애격리](#동기식-호출-서킷-브레이킹-장애격리)
-    - [오토스케일 아웃](#오토스케일-아웃)
-    - [무정지 재배포](#무정지-재배포)
+# 평가항목
+  * 분석설계
+  * SAGA
+  * CQRS
+  * Correlation / Compensation
+  * Req / Resp
+  * Gateway
+  * Deploy / Pipeline
+  * Circuit Breaker
+  * Autoscale(HPA)
+  * Self-healing(Liveness Probe)
+  * Zero-downtime deploy(Readiness Probe)
+  * Config Map / Persustemce Volume
+  * Polyglot
+   
+----
 
-# 서비스 시나리오
-- 기능적 요구사항
-    + 고객이 목적지를 설정하고 택시배차를 요청한다.
-    + 고객이 결제한다.
-    + 결제가 완료되면 요청내용(승차장소, 목적지)이 택시기사에게 전달된다.
-    + 택시기사는 수신된 배차정보를 승인하고 승차장소로 이동한다.
-    + 고객이 배차요청을 취소할 수 있다.
-    + 배차요청이 취소(결제취소)가 되면 배차도 취소된다.
-    + 택시기사는 배차요청/승인 상태를 중간중간 조회한다.
-    + 배차상태가 바뀌면 카톡을 알림을 보낸다.
-- 비기능적 요구사항
-    + 트랜잭션
-    + 장애격리
+# 분석설계
+  + Step1<p>
+    *전반적인 어플리케이션의 구조 및 흐름을 인지한 상태에서 실시한 이벤트 스토밍과정으로, 기초적인 이벤트 도출이나, Aggregation 작업은 `Bounded Context`를 먼저 선정하고 진행*
+    <img src = '/images/Screen Shot 2022-03-28 at 14.42.26.png'>
+
+  + Step2<p>
+    *Pub/Sub연결*
+    <img src = '/images/Screen Shot 2022-03-28 at 15.18.42.png'>
+
+  + Step3<p>
+   *완성본 대한 기능 검증*
+    <img src = '/images/Screen Shot 2022-03-28 at 15.30.42.png'>
+
+    ```
+    - 기능요소
+      - 사용자가 배차를 `요청`한다 (OK)
+      - 사용자가 `결제`한다 (OK)
+      - 결제가 완료되면 택시기사에게 `배차` 요청정보가 전달된다 (OK)
+      - 택시기사가 배차를 확정하면 서비스가 시작되고 배차상태가 변경된다 (OK)
+    - 비기능요소
+      - 마이크로 서비스를 넘나드느 시나리오에 대한 트랜잭션 처리 (OK)
+      - 고객 결제처리 : 결제가 완료되지 않은 요청은 `ACID` 트랜잭션 적용(Request/Response 방식처리) (OK)
+      - 결제가 완료되면 택시기사에게 배차 요청정보가 전달된다 (OK)
+    ```
+
+# SAGA
+    + 구현
+    서비스를 Local에서 아래와 같은 방법으로 서비스별로 개별적으로 실행한다.
+    ```
+    cd app
+    mvn spring-boot:run
+
+    cd pay
+    mvn spring-boot:run 
+
+    cd store
+    mvn spring-boot:run  
+
+    cd customer
+    python policy-handler.py 
+
+    ```
+     
