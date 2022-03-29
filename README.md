@@ -47,8 +47,9 @@ H Taxi
     ```
 
 # SAGA
-    + 구현
+  + 구현<p>
     서비스를 Local에서 아래와 같은 방법으로 서비스별로 개별적으로 실행한다.
+   
     ```
     cd app
     mvn spring-boot:run
@@ -63,4 +64,43 @@ H Taxi
     python policy-handler.py 
 
     ```
-     
+  + DDD적용<p>
+    3개의 도메인으로 관리되고 있으며 `배차요청(Grab)`, `결제(Payment)`, `배차할당(Allocation)`으로 구성된다.
+    ```diff
+    ... 
+    
+    @Document
+    @Table(name="Grab_table")
+    public class Grab  {
+
+        @Id
+        @GeneratedValue(strategy=GenerationType.AUTO)
+        private Long id;
+        private Integer grabStatus;
+        private String phoneNumber;
+        private String startingPoint;
+        private String destination;
+        private Integer estimatedFee;
+
+        @PostPersist
+        public void onPostPersist(){
+
+            //배차요청
+            GrabRequestConfirmed grabRequestConfirmed = new GrabRequestConfirmed();
+
++           BeanUtils.copyProperties(this, grabRequestConfirmed);
+            grabRequestConfirmed.publishAfterCommit();
+
++           htaxi.external.Payment payment = new htaxi.external.Payment();
+            payment.setId(getid());
+
+            GrabApplication.applicationContext.getBean(htaxi.external.PaymentService.class).pay(payment);
+            grabCancelled.publishAfterCommit();
+
+        }
+     ...
+   
+    ```
+  + 서비스 호출흐름(Sync)<p>
+    배차요청(Grab) -> 결제(Pay)간 호출은 동기식으로 일관성을 유지하는 트랜젝션으로 처리
+  + 서비스 호출흐름(Async)<p>
