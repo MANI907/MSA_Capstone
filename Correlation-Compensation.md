@@ -1,5 +1,5 @@
 ## Correlation Id
-------------
+
 Correlation Id를 생성하는 로직은 common-module로 구성하였다. 해당 로직은, 모든 컴포넌트에 동일하게 적용하고 컴포넌트 간의 통신은 Json 기반의 Http request를 받았을 때, Filter 에서 생성
 ```java
 @Slf4j
@@ -47,7 +47,7 @@ public class CorrelationHttpHeaderHelper {
 
 
 ## Compensation
------------------
+
 Correlation Id 정보를 기반으로 kafka를 이용한 비동기방식의 Compensation Transaction 처리
 ```java
 package com.example.kafkapub.publish;
