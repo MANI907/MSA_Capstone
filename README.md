@@ -934,7 +934,7 @@ date: Tue, 29 Mar 2022 05:28:15 GMT
 server: envoy
 x-envoy-upstream-service-time: 13
 
-+h-taxi-grap-67ff6476bb-6rzwc/192.168.82.161
++ h-taxi-grap-67ff6476bb-6rzwc/192.168.82.161
 
 root@siege-75d5587bf6-fns4p:/# http http://h-taxi-grap:8080/actuator/echo
 HTTP/1.1 200 OK
@@ -944,7 +944,7 @@ date: Tue, 29 Mar 2022 05:28:16 GMT
 server: envoy
 x-envoy-upstream-service-time: 7
 
--h-taxi-grap-67ff6476bb-sq452/192.168.12.148
+- h-taxi-grap-67ff6476bb-sq452/192.168.12.148
 
 root@siege-75d5587bf6-fns4p:/# http http://h-taxi-grap:8080/actuator/echo
 HTTP/1.1 200 OK
@@ -954,7 +954,7 @@ date: Tue, 29 Mar 2022 05:28:17 GMT
 server: envoy
 x-envoy-upstream-service-time: 12
 
-+h-taxi-grap-67ff6476bb-6rzwc/192.168.82.161
++ h-taxi-grap-67ff6476bb-6rzwc/192.168.82.161
 
 root@siege-75d5587bf6-fns4p:/# http http://h-taxi-grap:8080/actuator/echo
 HTTP/1.1 200 OK
@@ -964,7 +964,7 @@ date: Tue, 29 Mar 2022 05:28:19 GMT
 server: envoy
 x-envoy-upstream-service-time: 11
 
--h-taxi-grap-67ff6476bb-sq452/192.168.12.148
+- h-taxi-grap-67ff6476bb-sq452/192.168.12.148
 ```
 + Pool Ejection 타임(3’) 경과후엔 컨테이너 3개가 모두 동작됨이 확인된다.
 ```
